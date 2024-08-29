@@ -1,5 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
-import { color } from "framer-motion";
+import { mode } from "@chakra-ui/theme-tools";
 
 const config = {
   initialColorMode: "light",
@@ -9,8 +9,8 @@ const config = {
 const styles = {
   global: () => ({
     body: {
-      color: module("gray.800", "white"),
-      bg: module("#fff", "#000"),
+      color: mode("gray.600", "white"),
+      bg: mode("#f6f6f6", "#000"),
     },
   }),
 };
@@ -19,7 +19,7 @@ const component = {
   Drawer: {
     baseStyle: () => ({
       dialog: {
-        bg: module("#fff", "#000"),
+        bg: mode("#fff", "#000"),
       },
     }),
   },
@@ -29,4 +29,10 @@ const theme = extendTheme({
   styles,
   component,
   config,
+  fonts: {
+    heading: `"Noto Sans KR", sans-serif`,
+    body: `"Noto Sans KR", sans-serif`,
+  },
 });
+
+export default theme;
