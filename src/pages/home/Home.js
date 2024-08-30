@@ -1,6 +1,7 @@
+import { Box } from "@chakra-ui/react";
 import { useState } from "react";
 
 export const Home = () => {
   const [todos, setTodos] = useState(() => {});
-  return <div>홈</div>;
+  return <Box maxW={"450px"} w={"100%"} minH={"100vh"}></Box>;
 };

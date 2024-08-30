@@ -3,23 +3,34 @@ import { mode } from "@chakra-ui/theme-tools";
 
 const config = {
   initialColorMode: "light",
-  useSystemColoyMode: false,
+  useSystemColorMode: false,
 };
 
+// const styles = {
+//   global: () => ({
+//     body: {
+//       color: mode("gray.800", "#d9d9d9"),
+//       bg: mode("f6f6f6", "#20214"),
+//     },
+//   }),
+// };
+
 const styles = {
-  global: () => ({
-    body: {
-      color: mode("gray.600", "white"),
-      bg: mode("#f6f6f6", "#000"),
+  styles: {
+    global: {
+      "html, body": {
+        color: mode("gray.800", "#d9d9d9"),
+        bg: mode("f6f6f6", "#20214"),
+      },
     },
-  }),
+  },
 };
 
 const component = {
   Drawer: {
     baseStyle: () => ({
       dialog: {
-        bg: mode("#fff", "#000"),
+        bg: mode("#fff", "#20214"),
       },
     }),
   },
@@ -30,7 +41,7 @@ const theme = extendTheme({
   component,
   config,
   fonts: {
-    heading: `"Noto Sans KR", sans-serif`,
+    heading: `"Do Hyeon", sans-serif`,
     body: `"Noto Sans KR", sans-serif`,
   },
 });

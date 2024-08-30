@@ -1,10 +1,40 @@
-import { Container, Heading, Text } from "@chakra-ui/react";
+import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Heading,
+  IconButton,
+  Text,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 export const Header = () => {
+  const { toggleColorMode } = useColorMode();
+  const Icon = useColorModeValue(MoonIcon, SunIcon);
+  const bg = useColorModeValue("#fff", "#000");
+  const fontColor = useColorModeValue("gray.600", "#fff");
+
   return (
-    <Container maxW={"450px"} h={"50px"} bgColor={"#fff"}>
+    <Box
+      maxW={"450px"}
+      w={"100%"}
+      h={"80px"}
+      bgColor={bg}
+      mx={"auto"}
+      position={"relative"}
+    >
+      <IconButton
+        position={"absolute"}
+        top={0}
+        left={0}
+        icon={<HamburgerIcon />}
+        bgColor={bg}
+        color={fontColor}
+        fontSize={"18px"}
+        fontWeight={"900"}
+      />
       <Heading margin={"15px 20px"}>
-        <Text textAlign={"center"} fontSize={"30px"} color={"gray.600"}>
+        <Text textAlign={"center"} fontSize={"30px"} color={fontColor}>
           뭐하셈? 적으셈!
         </Text>
         <Text
@@ -16,6 +46,19 @@ export const Header = () => {
           &copy; KimYeonJI 2024
         </Text>
       </Heading>
-    </Container>
+
+      <IconButton
+        bgColor={bg}
+        color={fontColor}
+        fontSize={"18px"}
+        onClick={toggleColorMode}
+        variant={"ghost"}
+        aria-label="Toggle dark mode"
+        icon={<Icon />}
+        position={"absolute"}
+        top={0}
+        right={0}
+      />
+    </Box>
   );
 };
