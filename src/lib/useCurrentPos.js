@@ -12,7 +12,7 @@ export const useCurrentPos = () => {
       coords: { latitude, longitude },
     } = pos;
 
-    console.log(latitude, longitude);
+    // console.log(latitude, longitude);
 
     setLat(latitude);
     setLon(longitude);
@@ -21,4 +21,13 @@ export const useCurrentPos = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(location);
   }, [lat, lon]);
+
+  //   navigator.geolocation.getCurrentPosition(location);
+
+  // console.log(lat, lon);
+
+  return {
+    lat,
+    lon,
+  };
 };

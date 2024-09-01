@@ -11,7 +11,7 @@ import {
 export const Header = () => {
   const { toggleColorMode } = useColorMode();
   const Icon = useColorModeValue(MoonIcon, SunIcon);
-  const bg = useColorModeValue("#fff", "#000");
+  const bg = useColorModeValue("#fff", "gray.900");
   const fontColor = useColorModeValue("gray.600", "#fff");
 
   return (
