@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Heading,
-  Image,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Heading, Image, Text, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { routes } from "../routes";
 
