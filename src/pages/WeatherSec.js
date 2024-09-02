@@ -22,12 +22,14 @@ export const WeatherSec = ({ tempData }) => {
             <Text fontSize={"40px"}>날씨는?</Text>
           </Heading>
           <Box
-            marginRight={"15px"}
+            w={"30%"}
+            mx={"auto"}
             display={"flex"}
             flexDirection={"column"}
             alignItems={"center"}
           >
             <Image
+              w={"100%"}
               src={`https://openweathermap.org/img/wn/${tempData.weather[0].icon}@2x.png`}
             />
             <Text fontSize={"16px"} fontWeight={"300"} color={fontColor}>

@@ -1,4 +1,3 @@
-import { Box, Container } from "@chakra-ui/react";
 import { useCurrentPos } from "../../lib/useCurrentPos";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "../../components/Loading";
@@ -8,6 +7,7 @@ import { TopBtn } from "../../components/TopBtn";
 import { useEffect, useState } from "react";
 import { WeatherSec } from "../WeatherSec";
 import { TodoSec } from "../TodoSec";
+import { Header } from "../../components/Header";
 
 export const Home = () => {
   const [todos, setTodos] = useState(() => {
@@ -33,11 +33,12 @@ export const Home = () => {
         <Loading />
       ) : (
         <>
+          <Header />
           <PageTitle title={"Home"} />
           {data && (
             <>
               <WeatherSec tempData={data} />
-              <TodoSec todos={todos} setTodos={setTodos} />
+              <TodoSec tempData={data} todos={todos} setTodos={setTodos} />
               <TopBtn />
             </>
           )}

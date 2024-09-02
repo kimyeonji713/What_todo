@@ -1,7 +1,19 @@
-import { Box, Heading, Input, Text, useColorModeValue } from "@chakra-ui/react";
+import { DeleteIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Checkbox,
+  Heading,
+  HStack,
+  Input,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { DeleteBtn } from "../components/DeleteBtn";
 
-export const TodoSec = ({ todos, setTodos }) => {
+export const TodoSec = ({ todos, setTodos, tempData }) => {
   const bg = useColorModeValue("#fff", "gray.900");
   const fontColor = useColorModeValue("gray.600", "#fff");
 
@@ -24,6 +36,22 @@ export const TodoSec = ({ todos, setTodos }) => {
     ]);
 
     reset();
+  };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
+  const [currentId, setCurrentId] = useState();
+
+  const onClickFinish = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, finish: !todo.finish } : todo
+      )
+    );
+  };
+
+  const onClickDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -50,6 +78,68 @@ export const TodoSec = ({ todos, setTodos }) => {
           />
         </Box>
       </Heading>
+      {todos.length > 0 ? (
+        <>
+          {todos.map((data) => (
+            <HStack
+              key={data.id}
+              borderRadius={20}
+              h={"70px"}
+              p={"15px"}
+              display={"flex"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Checkbox
+                onChange={() => onClickFinish(data.id)}
+                colorScheme="pink"
+                size={"lg"}
+                isChecked={data.finish}
+              >
+                <Box>
+                  <Text>{data.title}</Text>
+                  <Box
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <Text>{data.date}</Text>
+                    <Text marginLeft={"5px"}>
+                      {tempData.weather[0].description}
+                    </Text>
+                  </Box>
+                </Box>
+              </Checkbox>
+              <DeleteIcon
+                color={"red.500"}
+                opacity={"0.7"}
+                cursor={"pointer"}
+                onClick={() => {
+                  onOpen(setCurrentId(data.id));
+                }}
+              />
+            </HStack>
+          ))}
+        </>
+      ) : (
+        <Box
+          textAlign={"center"}
+          marginTop={"80px"}
+          fontSize={"18px"}
+          color={"#999"}
+        >
+          <Text>뭐하셈!</Text>
+          <Text> 빨리 적으셈!</Text>
+        </Box>
+      )}
+
+      <DeleteBtn
+        isOpen={isOpen}
+        onClose={onClose}
+        cancelRef={cancelRef}
+        currentId={currentId}
+        onClickDelete={onClickDelete}
+      />
     </Box>
   );
 };
