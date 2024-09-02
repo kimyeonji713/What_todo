@@ -18,7 +18,7 @@ import {
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { DeleteBtn } from "../components/DeleteBtn";
-import { Dday } from "./Dday";
+import { MemoSec } from "./MemoSec";
 
 export const TodoSec = ({ todos, setTodos }) => {
   const bg = useColorModeValue("#fff", "gray.900");
@@ -79,8 +79,12 @@ export const TodoSec = ({ todos, setTodos }) => {
     >
       <Tabs position="relative" variant="unstyled">
         <TabList>
-          <Tab w={"50%"}>TODO</Tab>
-          <Tab w={"50%"}>D-DAY</Tab>
+          <Tab w={"50%"} fontSize={"20px"}>
+            TODO
+          </Tab>
+          <Tab w={"50%"} fontSize={"20px"}>
+            MEMO
+          </Tab>
         </TabList>
         <TabIndicator
           mt="-1.5px"
@@ -90,10 +94,6 @@ export const TodoSec = ({ todos, setTodos }) => {
         />
         <TabPanels>
           <TabPanel>
-            <Text fontSize={"20px"} marginLeft={"15px"}>
-              TODO
-            </Text>
-
             <Heading padding={"0 15px"}>
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
                 <Input
@@ -111,10 +111,10 @@ export const TodoSec = ({ todos, setTodos }) => {
                     key={data.id}
                     borderRadius={20}
                     h={"70px"}
-                    p={"15px"}
                     display={"flex"}
                     justifyContent={"space-between"}
                     alignItems={"center"}
+                    padding={"50px 15px"}
                   >
                     <Checkbox
                       onChange={() => onClickFinish(data.id)}
@@ -123,8 +123,8 @@ export const TodoSec = ({ todos, setTodos }) => {
                       isChecked={data.finish}
                     >
                       <Box>
-                        <Text>{data.title}</Text>
-                        <Text>{data.date}</Text>
+                        <Text fontSize={"18px"}>{data.title}</Text>
+                        <Text fontSize={"15px"}>{data.date}</Text>
                       </Box>
                     </Checkbox>
                     <DeleteIcon
@@ -158,7 +158,7 @@ export const TodoSec = ({ todos, setTodos }) => {
               onClickDelete={onClickDelete}
             />
           </TabPanel>
-          <Dday todos={todos} setTodos={setTodos} />
+          <MemoSec todos={todos} setTodos={setTodos} />
         </TabPanels>
       </Tabs>
     </Box>

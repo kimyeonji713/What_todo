@@ -42,14 +42,15 @@ export const Header = () => {
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>정보</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader color={fontColor}>정보</ModalHeader>
+          <ModalCloseButton color={fontColor} />
           <ModalBody>
             <Text
               textAlign={"center"}
               fontSize={"14px"}
               fontWeight={"300"}
               margin={"5px 0"}
+              color={fontColor}
             >
               &copy; KimYeonJI 2024
             </Text>
@@ -60,10 +61,11 @@ export const Header = () => {
               margin={"5px 0"}
               display={"flex"}
               justifyContent={"center"}
+              color={fontColor}
             >
               github:
               <Link to="https://github.com/kimyeonji713/What_todo">
-                <Text marginLeft={"5px"}>
+                <Text color={fontColor} marginLeft={"5px"}>
                   https://github.com/kimyeonji713/What_todo
                 </Text>
               </Link>
