@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { WeatherSec } from "../WeatherSec";
 import { TodoSec } from "../TodoSec";
 import { Header } from "../../components/Header";
+import { Box } from "@chakra-ui/react";
 
 export const Home = () => {
   const [todos, setTodos] = useState(() => {
@@ -17,7 +18,7 @@ export const Home = () => {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-  }, []);
+  }, [todos]);
 
   const { lat, lon } = useCurrentPos();
 
@@ -26,7 +27,6 @@ export const Home = () => {
     queryFn: getWeather,
   });
 
-  console.log(data);
   return (
     <>
       {isLoading ? (
@@ -38,7 +38,7 @@ export const Home = () => {
           {data && (
             <>
               <WeatherSec tempData={data} />
-              <TodoSec tempData={data} todos={todos} setTodos={setTodos} />
+              <TodoSec todos={todos} setTodos={setTodos} />
               <TopBtn />
             </>
           )}

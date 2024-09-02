@@ -10,18 +10,16 @@ const config = {
 //   global: () => ({
 //     body: {
 //       color: mode("gray.800", "#d9d9d9"),
-//       bg: mode("f6f6f6", "#20214"),
+//       bg: mode("#2b2b2b", "#20214"),
 //     },
 //   }),
 // };
 
 const styles = {
-  styles: {
-    global: {
-      "html, body": {
-        color: mode("gray.800", "#d9d9d9"),
-        bg: mode("f6f6f6", "#20214"),
-      },
+  global: {
+    "html, body": {
+      color: mode("gray.800", "#d9d9d9"),
+      bg: mode("#f6f6f6", "#202140"),
     },
   },
 };
@@ -30,7 +28,7 @@ const component = {
   Drawer: {
     baseStyle: () => ({
       dialog: {
-        bg: mode("#fff", "#20214"),
+        bg: mode("#2d2d2d", "#20214"),
       },
     }),
   },

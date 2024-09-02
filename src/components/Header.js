@@ -1,18 +1,29 @@
-import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { MoonIcon, QuestionOutlineIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
   Heading,
   IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const { toggleColorMode } = useColorMode();
   const Icon = useColorModeValue(MoonIcon, SunIcon);
   const bg = useColorModeValue("#fff", "gray.900");
   const fontColor = useColorModeValue("gray.600", "#fff");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
@@ -21,30 +32,50 @@ export const Header = () => {
       h={"80px"}
       bgColor={bg}
       mx={"auto"}
-      position={"relative"}
+      display={"flex"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
     >
-      <IconButton
-        position={"absolute"}
-        top={0}
-        left={0}
-        icon={<HamburgerIcon />}
-        bgColor={bg}
-        color={fontColor}
-        fontSize={"18px"}
-        fontWeight={"900"}
-      />
-      <Heading margin={"15px 20px"}>
-        <Text textAlign={"center"} fontSize={"30px"} color={fontColor}>
-          뭐하셈? 적으셈!
-        </Text>
-        <Text
-          textAlign={"center"}
-          fontSize={"14px"}
-          fontWeight={"300"}
-          margin={"5px 0"}
-        >
-          &copy; KimYeonJI 2024
-        </Text>
+      <Button onClick={onOpen} bgColor={bg}>
+        <QuestionOutlineIcon />
+      </Button>
+      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>정보</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text
+              textAlign={"center"}
+              fontSize={"14px"}
+              fontWeight={"300"}
+              margin={"5px 0"}
+            >
+              &copy; KimYeonJI 2024
+            </Text>
+            <Text
+              textAlign={"center"}
+              fontSize={"14px"}
+              fontWeight={"300"}
+              margin={"5px 0"}
+              display={"flex"}
+              justifyContent={"center"}
+            >
+              github:
+              <Link to="https://github.com/kimyeonji713/What_todo">
+                <Text marginLeft={"5px"}>
+                  https://github.com/kimyeonji713/What_todo
+                </Text>
+              </Link>
+            </Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>닫기</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      <Heading textAlign={"center"} fontSize={"30px"} color={fontColor}>
+        뭐하셈? 적으셈!
       </Heading>
 
       <IconButton
@@ -55,9 +86,6 @@ export const Header = () => {
         variant={"ghost"}
         aria-label="Toggle dark mode"
         icon={<Icon />}
-        position={"absolute"}
-        top={0}
-        right={0}
       />
     </Box>
   );

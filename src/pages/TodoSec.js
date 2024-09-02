@@ -5,6 +5,12 @@ import {
   Heading,
   HStack,
   Input,
+  Tab,
+  TabIndicator,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   Text,
   useColorModeValue,
   useDisclosure,
@@ -12,14 +18,16 @@ import {
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { DeleteBtn } from "../components/DeleteBtn";
+import { Dday } from "./Dday";
 
-export const TodoSec = ({ todos, setTodos, tempData }) => {
+export const TodoSec = ({ todos, setTodos }) => {
   const bg = useColorModeValue("#fff", "gray.900");
   const fontColor = useColorModeValue("gray.600", "#fff");
 
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
+  const date = now.getDate();
   const day = now.getDay();
 
   const { register, handleSubmit, reset } = useForm();
@@ -31,7 +39,7 @@ export const TodoSec = ({ todos, setTodos, tempData }) => {
       {
         id: Date.now(),
         title: text,
-        date: `${year}년${month}월${day}일`,
+        date: `${year}년${month}월${date}일`,
       },
     ]);
 
@@ -45,7 +53,12 @@ export const TodoSec = ({ todos, setTodos, tempData }) => {
   const onClickFinish = (id) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id ? { ...todo, finish: !todo.finish } : todo
+        todo.id === id
+          ? {
+              ...todo,
+              finish: !todo.finish,
+            }
+          : todo
       )
     );
   };
@@ -58,88 +71,96 @@ export const TodoSec = ({ todos, setTodos, tempData }) => {
     <Box
       maxW={"450px"}
       w={"100%"}
-      h={"600px"}
+      minH={"100vh"}
       mx={"auto"}
-      marginTop={"20px"}
       bgColor={bg}
       color={fontColor}
+      padding={"10px 0"}
     >
-      <Text fontSize={"20px"} marginLeft={"15px"}>
-        TODO
-      </Text>
+      <Tabs position="relative" variant="unstyled">
+        <TabList>
+          <Tab w={"50%"}>TODO</Tab>
+          <Tab w={"50%"}>D-DAY</Tab>
+        </TabList>
+        <TabIndicator
+          mt="-1.5px"
+          height="2px"
+          bg="#FF0080"
+          borderRadius="1px"
+        />
+        <TabPanels>
+          <TabPanel>
+            <Text fontSize={"20px"} marginLeft={"15px"}>
+              TODO
+            </Text>
 
-      <Heading padding={"0 15px"}>
-        <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            {...register("todo", {
-              required: "빈 내용은 안돼요😣",
-            })}
-            placeholder="내용을 적어주세요."
-          />
-        </Box>
-      </Heading>
-      {todos.length > 0 ? (
-        <>
-          {todos.map((data) => (
-            <HStack
-              key={data.id}
-              borderRadius={20}
-              h={"70px"}
-              p={"15px"}
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-            >
-              <Checkbox
-                onChange={() => onClickFinish(data.id)}
-                colorScheme="pink"
-                size={"lg"}
-                isChecked={data.finish}
-              >
-                <Box>
-                  <Text>{data.title}</Text>
-                  <Box
+            <Heading padding={"0 15px"}>
+              <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+                <Input
+                  {...register("todo", {
+                    required: "빈 내용은 안돼요😣",
+                  })}
+                  placeholder="내용을 적어주세요."
+                />
+              </Box>
+            </Heading>
+            {todos.length > 0 ? (
+              <>
+                {todos.map((data) => (
+                  <HStack
+                    key={data.id}
+                    borderRadius={20}
+                    h={"70px"}
+                    p={"15px"}
                     display={"flex"}
-                    justifyContent={"center"}
+                    justifyContent={"space-between"}
                     alignItems={"center"}
                   >
-                    <Text>{data.date}</Text>
-                    <Text marginLeft={"5px"}>
-                      {tempData.weather[0].description}
-                    </Text>
-                  </Box>
-                </Box>
-              </Checkbox>
-              <DeleteIcon
-                color={"red.500"}
-                opacity={"0.7"}
-                cursor={"pointer"}
-                onClick={() => {
-                  onOpen(setCurrentId(data.id));
-                }}
-              />
-            </HStack>
-          ))}
-        </>
-      ) : (
-        <Box
-          textAlign={"center"}
-          marginTop={"80px"}
-          fontSize={"18px"}
-          color={"#999"}
-        >
-          <Text>뭐하셈!</Text>
-          <Text> 빨리 적으셈!</Text>
-        </Box>
-      )}
+                    <Checkbox
+                      onChange={() => onClickFinish(data.id)}
+                      colorScheme="pink"
+                      size={"lg"}
+                      isChecked={data.finish}
+                    >
+                      <Box>
+                        <Text>{data.title}</Text>
+                        <Text>{data.date}</Text>
+                      </Box>
+                    </Checkbox>
+                    <DeleteIcon
+                      color={"red.500"}
+                      opacity={"0.7"}
+                      cursor={"pointer"}
+                      onClick={() => {
+                        onOpen(setCurrentId(data.id));
+                      }}
+                    />
+                  </HStack>
+                ))}
+              </>
+            ) : (
+              <Box
+                textAlign={"center"}
+                marginTop={"80px"}
+                fontSize={"18px"}
+                color={"#999"}
+              >
+                <Text>뭐하셈!</Text>
+                <Text> 빨리 적으셈!</Text>
+              </Box>
+            )}
 
-      <DeleteBtn
-        isOpen={isOpen}
-        onClose={onClose}
-        cancelRef={cancelRef}
-        currentId={currentId}
-        onClickDelete={onClickDelete}
-      />
+            <DeleteBtn
+              isOpen={isOpen}
+              onClose={onClose}
+              cancelRef={cancelRef}
+              currentId={currentId}
+              onClickDelete={onClickDelete}
+            />
+          </TabPanel>
+          <Dday todos={todos} setTodos={setTodos} />
+        </TabPanels>
+      </Tabs>
     </Box>
   );
 };
