@@ -17,6 +17,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { PiPencilCircleLight } from "react-icons/pi";
 
 export const Header = () => {
   const { toggleColorMode } = useColorMode();
@@ -76,9 +77,15 @@ export const Header = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Heading textAlign={"center"} fontSize={"30px"} color={fontColor}>
-        뭐하셈? 적으셈!
-      </Heading>
+      <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+        <Box fontSize={"35px"} color={fontColor}>
+          <PiPencilCircleLight />
+        </Box>
+        <Heading textAlign={"center"} fontSize={"16px"} color={fontColor}>
+          <Text>뭐하셈?</Text>
+          <Text marginTop={"-5px"}>적으셈!</Text>
+        </Heading>
+      </Box>
 
       <IconButton
         bgColor={bg}

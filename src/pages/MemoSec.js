@@ -34,6 +34,9 @@ export const MemoSec = () => {
   const now = new Date();
   const month = now.getMonth() + 1;
   const date = now.getDate();
+  // const hours = String(now.getHours()).padStart(2, "0");
+  // const minutes = String(now.getMinutes()).padStart(2, "0");
+  // const seconds = String(now.getSeconds()).padStart(2, "0");
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -90,8 +93,8 @@ export const MemoSec = () => {
             <HStack
               key={data.id}
               borderRadius={20}
-              h={"70px"}
-              padding={"50px 15px"}
+              minH={"70px"}
+              padding={"5px 15px"}
             >
               <Box
                 w={"100%"}
@@ -105,24 +108,23 @@ export const MemoSec = () => {
               >
                 <Box
                   onChange={() => onClickFinish(data.id)}
-                  colorScheme="pink"
+                  // colorScheme="pink"
                   size={"lg"}
                   isChecked={data.finish}
                   display={"flex"}
                 >
                   <Box
-                    w={"50px"}
+                    minW={"50px"}
                     h={"50px"}
-                    padding={"5px"}
                     color={"#D63484"}
                     bgColor={"#FFE6E6"}
                     borderRadius={"50%"}
                     marginRight={"15px"}
                   >
                     <Text
-                      fontSize={"18px"}
+                      fontSize={"17px"}
                       textAlign={"center"}
-                      lineHeight={"38px"}
+                      lineHeight={"50px"}
                       fontWeight={"600"}
                     >
                       {data.date}

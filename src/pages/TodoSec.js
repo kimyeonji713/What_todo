@@ -114,7 +114,7 @@ export const TodoSec = ({ todos, setTodos }) => {
                     display={"flex"}
                     justifyContent={"space-between"}
                     alignItems={"center"}
-                    padding={"50px 15px"}
+                    padding={"20px 15px"}
                   >
                     <Checkbox
                       onChange={() => onClickFinish(data.id)}

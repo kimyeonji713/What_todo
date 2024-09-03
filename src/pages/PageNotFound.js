@@ -6,7 +6,7 @@ export const PageNotFound = () => {
     <Box maxW={"450px"} w={"100%"} minH={"100vh"} mx={"auto"} bgColor={"#fff"}>
       <Text
         padding={"60% 31% 5% 31%"}
-        fontSize={"80px"}
+        fontSize={"75px"}
         fontWeight={"900"}
         letterSpacing={10}
         color={"#D63484"}
