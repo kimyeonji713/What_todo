@@ -2,7 +2,8 @@ import { AbsoluteCenter, Box, useColorModeValue } from "@chakra-ui/react";
 import { PulseLoader } from "react-spinners";
 
 export const Loading = () => {
-  const bg = useColorModeValue("gray.600", "#fff");
+  const fontColor = useColorModeValue("gray.600", "#fff");
+  const bg = useColorModeValue("#fff", "gray.900");
 
   return (
     <Box
@@ -15,7 +16,7 @@ export const Loading = () => {
       bgColor={bg}
     >
       <AbsoluteCenter p="1" axis="both">
-        <PulseLoader color={bg} />
+        <PulseLoader color={"#D63484"} />
       </AbsoluteCenter>
     </Box>
   );

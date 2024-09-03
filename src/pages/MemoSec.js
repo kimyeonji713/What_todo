@@ -12,35 +12,39 @@ import {
 } from "@chakra-ui/react";
 import { DeleteBtn } from "../components/DeleteBtn";
 import { useForm } from "react-hook-form";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export const MemoSec = ({ todos, setTodos }) => {
+export const MemoSec = () => {
   const bg = useColorModeValue("#fff", "gray.900");
   const fontColor = useColorModeValue("gray.600", "#fff");
   const borderColor = useColorModeValue(
-    "1px solid gray.600",
+    "1px solid #E9EFEC",
     "1px solid #585858"
   );
 
+  const [todos_2, setTodos_2] = useState(() => {
+    const registTodo = localStorage.getItem("todos");
+    return registTodo ? JSON.parse(registTodo) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos_2));
+  }, [todos_2]);
+
   const now = new Date();
-  const year = now.getFullYear();
   const month = now.getMonth() + 1;
   const date = now.getDate();
-  const day = now.getDay();
-  //   const hours = String(date.getHours()).padStart(2, "0");
-  //   const minutes = String(date.getMinutes()).padStart(2, "0");
-  //   const seconds = String(date.getSeconds()).padStart(2, "0");
 
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit_2 = (data) => {
     const { todo: text } = data;
-    setTodos([
-      ...todos,
+    setTodos_2([
+      ...todos_2,
       {
         id: Date.now(),
         title: text,
-        date: `${year}년${month}월${date}일 `,
+        date: `${month}.${date} `,
       },
     ]);
 
@@ -52,8 +56,8 @@ export const MemoSec = ({ todos, setTodos }) => {
   const [currentId, setCurrentId] = useState();
 
   const onClickFinish = (id) => {
-    setTodos(
-      todos.map((todo) =>
+    setTodos_2(
+      todos_2.map((todo) =>
         todo.id === id
           ? {
               ...todo,
@@ -65,13 +69,13 @@ export const MemoSec = ({ todos, setTodos }) => {
   };
 
   const onClickDelete = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos_2(todos_2.filter((todo) => todo.id !== id));
   };
 
   return (
     <TabPanel>
       <Heading padding={"0 15px"}>
-        <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+        <Box as="form" onSubmit={handleSubmit(onSubmit_2)}>
           <Input
             {...register("todo", {
               required: "빈 내용은 안돼요😣",
@@ -80,9 +84,9 @@ export const MemoSec = ({ todos, setTodos }) => {
           />
         </Box>
       </Heading>
-      {todos.length > 0 ? (
+      {todos_2.length > 0 ? (
         <>
-          {todos.map((data) => (
+          {todos_2.map((data) => (
             <HStack
               key={data.id}
               borderRadius={20}
@@ -92,24 +96,42 @@ export const MemoSec = ({ todos, setTodos }) => {
               <Box
                 w={"100%"}
                 padding={"10px"}
-                border={`1px solid #888`}
+                border={borderColor}
                 borderRadius={"10px"}
                 display={"flex"}
                 justifyContent={"space-between"}
                 alignItems={"center"}
                 marginTop={"20px"}
               >
-                <Checkbox
+                <Box
                   onChange={() => onClickFinish(data.id)}
                   colorScheme="pink"
                   size={"lg"}
                   isChecked={data.finish}
+                  display={"flex"}
                 >
-                  <Box>
-                    <Text fontSize={"18px"}>{data.date}</Text>
-                    <Text fontSize={"15px"}>{data.title}</Text>
+                  <Box
+                    w={"50px"}
+                    h={"50px"}
+                    padding={"5px"}
+                    color={"#D63484"}
+                    bgColor={"#FFE6E6"}
+                    borderRadius={"50%"}
+                    marginRight={"15px"}
+                  >
+                    <Text
+                      fontSize={"18px"}
+                      textAlign={"center"}
+                      lineHeight={"38px"}
+                      fontWeight={"600"}
+                    >
+                      {data.date}
+                    </Text>
                   </Box>
-                </Checkbox>
+                  <Box>
+                    <Text fontSize={"16px"}>{data.title}</Text>
+                  </Box>
+                </Box>
                 <DeleteIcon
                   color={"red.500"}
                   opacity={"0.7"}

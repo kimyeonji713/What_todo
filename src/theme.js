@@ -34,6 +34,12 @@ const component = {
   },
 };
 
+const breakpoints = {
+  base: "368px",
+  sm: "450px",
+  md: "500px",
+};
+
 const theme = extendTheme({
   styles,
   component,
@@ -42,6 +48,7 @@ const theme = extendTheme({
     heading: `"Do Hyeon", sans-serif`,
     body: `"Noto Sans KR", sans-serif`,
   },
+  breakpoints,
 });
 
 export default theme;
