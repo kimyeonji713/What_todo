@@ -32,7 +32,7 @@ export const WeatherSec = ({ tempData }) => {
             fontSize={"40px"}
             fontWeight={400}
             color={fontColor}
-            marginBottom={"-20px"}
+            marginBottom={"-10px"}
           >
             {Math.round(tempData.main.temp)} <span>°</span>
           </Text>

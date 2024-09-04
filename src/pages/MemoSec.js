@@ -23,12 +23,12 @@ export const MemoSec = () => {
   );
 
   const [todos_2, setTodos_2] = useState(() => {
-    const registTodo = localStorage.getItem("todos");
+    const registTodo = localStorage.getItem("memos");
     return registTodo ? JSON.parse(registTodo) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos_2));
+    localStorage.setItem("memos", JSON.stringify(todos_2));
   }, [todos_2]);
 
   const now = new Date();

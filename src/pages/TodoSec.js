@@ -158,7 +158,7 @@ export const TodoSec = ({ todos, setTodos }) => {
               onClickDelete={onClickDelete}
             />
           </TabPanel>
-          <MemoSec todos={todos} setTodos={setTodos} />
+          <MemoSec />
         </TabPanels>
       </Tabs>
     </Box>
