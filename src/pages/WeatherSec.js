@@ -28,10 +28,20 @@ export const WeatherSec = ({ tempData }) => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Text fontSize={"40px"} fontWeight={400} color={fontColor}>
+          <Text
+            fontSize={"40px"}
+            fontWeight={400}
+            color={fontColor}
+            marginBottom={"-20px"}
+          >
             {Math.round(tempData.main.temp)} <span>°</span>
           </Text>
-          <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+          <Box
+            marginLeft={"-25px"}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             <Image
               w={"35%"}
               src={`https://openweathermap.org/img/wn/${tempData.weather[0].icon}@2x.png`}
